@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+@theme {
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-950: #1e1b4b;
+
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+
+  --color-rose-300: #fca5a5;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-rose-600: #e11d48;
+  --color-rose-800: #9f1239;
+  --color-rose-900: #881337;
+  --color-rose-950: #4c0519;
+
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    user-select: none;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.8);
+}
+
+/* Background Texture Overlays */
+.texture-linen {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.texture-dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.texture-parchment {
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(180, 83, 9, 0.03) 0%, transparent 80%),
+    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 6px 6px;
+}
+
+/* Rich-text inline formatting support */
+.rich-text-content b,
+.rich-text-content strong {
+  font-weight: 700;
+}
+
+.rich-text-content i,
+.rich-text-content em {
+  font-style: italic;
+}
+
+.rich-text-content u {
+  text-decoration: underline;
+}
+
+.rich-text-content sup {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.rich-text-content sub {
+  font-size: 0.75em;
+  vertical-align: sub;
+  line-height: 0;
+}
+
+/* Mobile touch improvements */
+button,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Allow scrolling on canvas container */
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area bottom padding for notched devices */
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* Allow text selection in rich-text editing mode */
+.rich-text-content[contenteditable="true"] {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Dedicated Print Stylesheet: Fits exact A4 Page without cutoff */
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+  
+  html, body {
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* Hide application shell, header, sidebar, toolbars, and guides */
+  header,
+  nav,
+  aside,
+  .control-panel,
+  .no-print,
+  .selection-handle,
+  .alignment-guide,
+  .canvas-grid,
+  .rich-toolbar,
+  #modal-root {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Reset outer layout wrappers to static page flow */
+  #root,
+  #root > div,
+  main,
+  main > div {
+    display: block !important;
+    position: static !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    max-width: 210mm !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    transform: none !important;
+  }
+  
+  /* Target the A4 document canvas: fit exactly 210mm x 297mm */
+  #a4-print-target {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    min-width: 210mm !important;
+    min-height: 297mm !important;
+    max-width: 210mm !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    overflow: hidden !important;
+    transform: none !important;
+    transform-origin: 0 0 !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  #a4-print-target * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
