@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { CanvasElement, PageSettings, CoverTemplate } from './types';
 import { 
   DEFAULT_ELEMENTS, 
@@ -362,6 +363,9 @@ export function App() {
         onConfirm={handleConfirmReset}
         onCancel={() => setIsResetModalOpen(false)}
       />
+      
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
